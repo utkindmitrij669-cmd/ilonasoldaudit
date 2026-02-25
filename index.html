@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Як повернути пристрасть | Ілона Солдатюк</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Intl-Tel-Input -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wine: {
+                            dark: '#1a0509',     /* Очень темный бордовый фон */
+                            main: '#4a0e1c',     /* Насыщенный винный */
+                            light: '#721b2e'     /* Светлый акцент */
+                        },
+                        rose: {
+                            100: '#fdf2f8',
+                            200: '#fce7f3',
+                            300: '#fbcfe8',
+                            400: '#f9a8d4',
+                            gold: '#eebb99',     /* Розовое золото */
+                        },
+                        cream: '#fcfbf7'         /* Молочный текст */
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'passion-gradient': 'linear-gradient(135deg, #9f1239 0%, #db2777 100%)', /* Сочный градиент кнопки */
+                        'glass': 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)'
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(219, 39, 119, 0.3)',
+                        'card': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #1a0509; color: #fcfbf7; font-family: 'Montserrat', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
+        /* Input Styling */
+        .iti { width: 100%; }
+        .iti__dropdown-content { background-color: #2d0a12 !important; border: 1px solid #721b2e !important; color: #fff !important; }
+        .iti__country-list { background-color: #2d0a12 !important; }
+        .iti__selected-flag { background-color: transparent !important; }
+        
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(45, 10, 18, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Juicy Button Animation */
+        .btn-pulse {
+            animation: pulse-shadow 2s infinite;
+        }
+        @keyframes pulse-shadow {
+            0% { box-shadow: 0 0 0 0 rgba(219, 39, 119, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(219, 39, 119, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(219, 39, 119, 0); }
+        }
+
+        /* Smooth Fade In */
+        .fade-in-up { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+        .visible { opacity: 1; transform: translateY(0); }
+        
+        .text-gradient {
+            background: linear-gradient(to right, #fdf2f8, #eebb99);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        fbq('init', 'YOUR_PIXEL_ID'); // ЗАМЕНИ НА ID
+        fbq('track', 'PageView');
+    </script>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-rose-500 selection:text-white">
+
+    <!-- === HERO SECTION === -->
+    <header class="relative min-h-[95vh] flex flex-col items-center justify-center text-center px-4 py-8 overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <!-- Желательно фото с красным оттенком или ч/б -->
+            <img src="hero.jpg" alt="Passion" class="w-full h-full object-cover opacity-60">
+            <!-- Градиент поверх фото (Винный -> Черный) -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#1a0509]/60 via-[#4a0e1c]/40 to-[#1a0509]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-2xl w-full flex flex-col items-center gap-6 fade-in-up">
+            <!-- Tag -->
+            <div class="inline-flex items-center gap-2 border border-rose-gold/40 bg-wine-dark/60 backdrop-blur-md px-5 py-2 rounded-full">
+                <span class="text-[10px] uppercase tracking-[0.2em] text-rose-gold font-semibold">ТЗ під платний аудит</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-3xl md:text-5xl leading-[1.2] font-serif text-white drop-shadow-xl">
+                Як повернути <span class="text-rose-400 italic font-medium">пристрасть</span> в стосунках, <br>
+                <span class="text-2xl md:text-3xl font-light text-cream/90 block mt-3">якщо ти більше його не хочеш — але він дає тобі все?</span>
+            </h1>
+
+            <p class="text-base text-rose-100/80 font-light max-w-md mx-auto">
+                Без ігор, маніпуляцій і спроб стати іншою.
+            </p>
+
+            <!-- Offer Card -->
+            <div class="w-full glass-card p-6 md:p-8 rounded-2xl shadow-card mt-4 border border-rose-300/10">
+                <p class="text-sm text-gray-200 mb-5 leading-relaxed">
+                    Приходь на індивідуальну сесію, де ми знайдемо саме твою причину згасання і складемо конкретний план.
+                </p>
+                
+                <!-- Price & Timer -->
+                <div class="flex flex-col items-center gap-3 mb-6">
+                    <div class="flex items-baseline gap-4">
+                        <span class="text-5xl font-serif text-rose-gold font-medium">22 €</span>
+                        <span class="text-xl text-white/40 line-through decoration-rose-500 decoration-1">144 €</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs font-semibold tracking-wider text-rose-300 bg-rose-500/10 px-3 py-1.5 rounded-lg border border-rose-500/20">
+                        <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                        ДО ЗБІЛЬШЕННЯ ЦІНИ: <span id="timer" class="tabular-nums">14:59</span>
+                    </div>
+                </div>
+
+                <!-- Main Button -->
+                <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-semibold py-4 rounded-xl shadow-glow btn-pulse uppercase tracking-[0.15em] text-sm hover:scale-[1.02] transition-transform duration-300 relative overflow-hidden group">
+                    <span class="relative z-10">Хочу розпалити пристрасть</span>
+                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- === PAIN POINTS (BLOCK 2) === -->
+    <section class="py-16 px-4 relative">
+        <!-- Декоративное пятно -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-2xl mx-auto space-y-10 relative z-10">
+            <h2 class="text-3xl md:text-4xl text-center font-serif italic text-white fade-in-up">Це про тебе?</h2>
+            
+            <div class="grid gap-5">
+                <!-- Pain Item -->
+                <div class="glass-card p-6 rounded-xl border-l-4 border-rose-500 fade-in-up hover:bg-white/5 transition-colors">
+                    <h3 class="text-rose-200 font-serif text-lg mb-2 flex items-center gap-3">
+                        <span class="text-2xl">🥀</span> Він хороший. Але я його не хочу.
+                    </h3>
+                    <p class="text-sm text-gray-300 font-light leading-relaxed">
+                        Він турбується, забезпечує. Ти знаєш, що тобі з ним добре і водночас у ліжку хочеться просто спати. Без збудження, без іскри.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl border-l-4 border-rose-500 fade-in-up hover:bg-white/5 transition-colors">
+                    <h3 class="text-rose-200 font-serif text-lg mb-2 flex items-center gap-3">
+                        <span class="text-2xl">⏳</span> Я не розумію, коли це зникло.
+                    </h3>
+                    <p class="text-sm text-gray-300 font-light leading-relaxed">
+                        Колись була хімія. А зараз — побут, рутина і відчуття, що ви більше партнери по господарству, ніж коханці.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl border-l-4 border-rose-500 fade-in-up hover:bg-white/5 transition-colors">
+                    <h3 class="text-rose-200 font-serif text-lg mb-2 flex items-center gap-3">
+                        <span class="text-2xl">💔</span> Я боюся, що це назавжди.
+                    </h3>
+                    <p class="text-sm text-gray-300 font-light leading-relaxed">
+                        Що якщо це кінець? Що якщо бажання не повернеться? Ти або терпиш без близькості, або думаєш про те, чого соромишся.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl border-l-4 border-rose-500 fade-in-up hover:bg-white/5 transition-colors">
+                    <h3 class="text-rose-200 font-serif text-lg mb-2 flex items-center gap-3">
+                        <span class="text-2xl">🎭</span> Я спробувала нове — не допомогло.
+                    </h3>
+                    <p class="text-sm text-gray-300 font-light leading-relaxed">
+                        Білизна, відпустка, розмови. На тиждень ставало краще, а потім знову порожнеча.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === DIAGNOSIS (BLOCK 3) === -->
+    <section class="py-20 px-4 bg-gradient-to-b from-[#1a0509] to-[#2d0a12]">
+        <div class="max-w-2xl mx-auto text-center fade-in-up">
+            <h2 class="text-2xl md:text-3xl font-serif text-white mb-6 leading-tight">
+                Чому пристрасть згасає навіть у <br><span class="text-gradient italic">хороших стосунках</span>
+            </h2>
+            <p class="text-rose-100/60 mb-12 text-sm max-w-md mx-auto">
+                Це не твоя провина і не його. Є 3 реальні причини, про які мовчать:
+            </p>
+
+            <div class="space-y-6 text-left">
+                <!-- Reason 1 -->
+                <div class="flex gap-5 items-start bg-white/5 p-5 rounded-xl border border-white/5">
+                    <div class="w-8 h-8 shrink-0 bg-rose-500 rounded-full flex items-center justify-center text-white font-serif italic text-lg shadow-[0_0_15px_rgba(244,63,94,0.4)]">1</div>
+                    <div>
+                        <h4 class="text-lg font-serif text-rose-100 mb-1">Ти загубила себе як жінку</h4>
+                        <p class="text-sm text-gray-400 font-light">Мама, партнер, господиня... Бажання народжується з жіночності. Коли вона придушена, бажання зникає.</p>
+                    </div>
+                </div>
+
+                <!-- Reason 2 -->
+                <div class="flex gap-5 items-start bg-white/5 p-5 rounded-xl border border-white/5">
+                    <div class="w-8 h-8 shrink-0 bg-rose-500 rounded-full flex items-center justify-center text-white font-serif italic text-lg shadow-[0_0_15px_rgba(244,63,94,0.4)]">2</div>
+                    <div>
+                        <h4 class="text-lg font-serif text-rose-100 mb-1">Є невидимий блок між вами</h4>
+                        <p class="text-sm text-gray-400 font-light">Стара образа, невисловлені слова. Тіло пам'ятає те, що розум "вже відпустив".</p>
+                    </div>
+                </div>
+
+                <!-- Reason 3 -->
+                <div class="flex gap-5 items-start bg-white/5 p-5 rounded-xl border border-white/5">
+                    <div class="w-8 h-8 shrink-0 bg-rose-500 rounded-full flex items-center justify-center text-white font-serif italic text-lg shadow-[0_0_15px_rgba(244,63,94,0.4)]">3</div>
+                    <div>
+                        <h4 class="text-lg font-serif text-rose-100 mb-1">Ви застрягли в одному сценарії</h4>
+                        <p class="text-sm text-gray-400 font-light">Мозок хоче новизни, і коли її немає — він вимикає інтерес до партнера. Секс стає механічним.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === SOLUTION (BLOCK 4) === -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <!-- Фоновый узор -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-felt.png')] opacity-20"></div>
+        <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-rose-900/20 to-transparent"></div>
+
+        <div class="max-w-2xl mx-auto relative z-10 fade-in-up">
+            <div class="text-center mb-10">
+                <span class="text-xs text-rose-400 uppercase tracking-widest border border-rose-500/30 px-4 py-1.5 rounded-full bg-rose-500/5">Рішення</span>
+                <h2 class="text-3xl font-serif text-white mt-6 italic">Що відбудеться на сесії</h2>
+                <p class="text-sm text-gray-400 mt-2">Це розбір саме твоєї ситуації.</p>
+            </div>
+
+            <div class="grid gap-4">
+                <div class="bg-gradient-to-r from-white/5 to-transparent p-6 rounded-lg border-l-2 border-rose-300">
+                    <h4 class="text-xl font-serif text-rose-100 mb-1">🔍 Знайдемо твою причину</h4>
+                    <p class="text-sm text-gray-400">Чому саме у тебе згасло бажання. Глибинний аналіз.</p>
+                </div>
+                <div class="bg-gradient-to-r from-white/5 to-transparent p-6 rounded-lg border-l-2 border-rose-300">
+                    <h4 class="text-xl font-serif text-rose-100 mb-1">💡 Побачиш, що заважає</h4>
+                    <p class="text-sm text-gray-400">Який блок чи сценарій стоїть між тобою і пристрастю.</p>
+                </div>
+                <div class="bg-gradient-to-r from-white/5 to-transparent p-6 rounded-lg border-l-2 border-rose-300">
+                    <h4 class="text-xl font-serif text-rose-100 mb-1">💋 Отримаєш план дій</h4>
+                    <p class="text-sm text-gray-400">Чіткі кроки, щоб вогонь повернувся. Без шаблонів.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <button onclick="openModal()" class="w-full md:w-auto px-10 bg-rose-100 hover:bg-white text-wine-dark font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] uppercase tracking-widest transition-all text-sm">
+                    Хочу на сесію
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- === BIO (BLOCK 5) === -->
+    <section class="py-16 px-4 bg-[#1f080c]">
+        <div class="max-w-3xl mx-auto fade-in-up">
+            <h2 class="text-3xl font-serif text-center mb-10 text-rose-gold">Хто я і чому мені можна довіряти</h2>
+            
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                <div class="w-full md:w-5/12 shrink-0">
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-rose-500/20 translate-x-3 translate-y-3 rounded-xl transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                        <img src="ilona.jpg" alt="Ілона Солдатюк" class="relative z-10 w-full rounded-xl shadow-2xl object-cover aspect-[3/4] filter contrast-110">
+                    </div>
+                </div>
+                
+                <div class="space-y-5 text-sm text-gray-300 font-light">
+                    <p class="font-serif text-2xl text-white italic">Мене звати Ілона Солдатюк</p>
+                    <p>Я пройшла через це сама — стосунки, де вже нічого не відчувається. Я знаю, як це — хотіти зберегти сім'ю і бути в гармонії.</p>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-rose-500"></i>
+                            <span class="text-white">10+ років роботи з жінками</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-rose-500"></i>
+                            <span class="text-white">Глибинна психотерапія</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-rose-500"></i>
+                            <span class="text-white">Робота з тілом і сексуальністю</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="p-4 bg-rose-500/10 border-l-2 border-rose-500 rounded-r-lg italic text-rose-100/90 text-sm mt-4">
+                        «Пристрасть не зникає назавжди. Вона просто захована під шарами втоми. Моя робота — допомогти тобі її знайти.»
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === REVIEWS (BLOCK 6) === -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto fade-in-up">
+            <h2 class="text-3xl font-serif text-center mb-8 italic">Що кажуть жінки</h2>
+            
+            <div class="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory custom-scrollbar">
+                <!-- Review Images -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[320px]">
+                    <img src="review1.jpg" alt="Відгук 1" class="w-full rounded-xl border border-white/10 shadow-lg">
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[320px]">
+                    <img src="review2.jpg" alt="Відгук 2" class="w-full rounded-xl border border-white/10 shadow-lg">
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[320px]">
+                    <img src="review3.jpg" alt="Відгук 3" class="w-full rounded-xl border border-white/10 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === GUARANTEE (BLOCK 7) === -->
+    <section class="py-12 px-4">
+        <div class="max-w-2xl mx-auto fade-in-up">
+            <div class="glass-card p-8 rounded-2xl text-center relative overflow-hidden border border-rose-500/30">
+                <!-- Glow -->
+                <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-rose-500/20 blur-[60px] rounded-full"></div>
+
+                <div class="relative z-10">
+                    <div class="flex justify-center mb-4">
+                        <div class="p-3 bg-rose-500/10 rounded-full">
+                            <i data-lucide="shield-check" class="w-8 h-8 text-rose-400"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-2xl font-serif text-white mb-3">100% Гарантія повернення</h2>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Якщо після сесії ти не отримаєш жодного нового розуміння своєї ситуації — я поверну тобі всі 22€ без зайвих питань.
+                    </p>
+                    <p class="text-rose-200 font-medium text-sm">
+                        Ти нічим не ризикуєш. Крім звички жити без бажання.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === OUTCOME (BLOCK 8) === -->
+    <section class="py-16 px-4 pb-32 bg-gradient-to-t from-[#2d0a12] to-transparent">
+        <div class="max-w-2xl mx-auto fade-in-up">
+            <h2 class="text-3xl font-serif text-center mb-10 italic">Що зміниться після сесії</h2>
+            
+            <ul class="space-y-5">
+                <li class="flex gap-4 p-4 rounded-lg bg-white/5 border border-white/5">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-rose-400 shrink-0"></i>
+                    <p class="text-gray-200 text-sm">Ти зрозумієш, чому бажання зникло і що з цим робити саме тобі.</p>
+                </li>
+                <li class="flex gap-4 p-4 rounded-lg bg-white/5 border border-white/5">
+                    <i data-lucide="heart" class="w-6 h-6 text-rose-400 shrink-0"></i>
+                    <p class="text-gray-200 text-sm">Перестанеш почуватись «зламаною» або винною.</p>
+                </li>
+                <li class="flex gap-4 p-4 rounded-lg bg-white/5 border border-white/5">
+                    <i data-lucide="map" class="w-6 h-6 text-rose-400 shrink-0"></i>
+                    <p class="text-gray-200 text-sm">Побачиш конкретний шлях до пристрасті без руйнування того, що є.</p>
+                </li>
+                <li class="flex gap-4 p-4 rounded-lg bg-white/5 border border-white/5">
+                    <i data-lucide="flame" class="w-6 h-6 text-rose-400 shrink-0"></i>
+                    <p class="text-white font-medium text-sm">Вогонь повернеться і цього разу ти знатимеш, як його підтримувати.</p>
+                </li>
+            </ul>
+
+            <div class="mt-12 text-center space-y-4">
+                 <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-bold py-5 rounded-xl shadow-glow btn-pulse uppercase tracking-widest text-lg hover:scale-[1.02] transition-transform">
+                    Хочу повернути пристрасть
+                </button>
+                <p class="text-rose-200/50 text-xs">Кількість місць за ціною 22€ обмежена</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- === STICKY MOBILE CTA === -->
+    <div class="fixed bottom-0 left-0 w-full p-4 bg-[#1a0509]/90 backdrop-blur-lg border-t border-rose-500/20 z-40 md:hidden">
+        <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-bold py-3 rounded-lg shadow-lg text-sm uppercase tracking-widest">
+            Записатись за 22€
+        </button>
+    </div>
+
+    <!-- === MODAL FORM === -->
+    <div id="modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity duration-300" onclick="closeModal()"></div>
+        <div class="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[480px] h-auto bg-[#1a0509] border-t md:border border-rose-500/30 rounded-t-2xl md:rounded-xl shadow-2xl transform translate-y-full md:translate-y-10 scale-95 opacity-0 transition-all duration-300" id="modal-panel">
+            
+            <div class="p-6 border-b border-rose-500/20 flex justify-between items-center bg-[#2d0a12]">
+                <div>
+                    <h3 class="font-serif text-xl text-white">Запис на сесію</h3>
+                    <p class="text-xs text-rose-300 mt-1">Крок 1 з 2</p>
+                </div>
+                <button onclick="closeModal()" class="text-white/50 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="p-6">
+                <form id="leadForm" class="space-y-5">
+                    <div class="space-y-1.5">
+                        <label class="text-xs uppercase text-rose-300 font-bold tracking-wider">Ім’я</label>
+                        <input type="text" name="name" required placeholder="Як до тебе звертатись?" class="w-full bg-[#120306] border border-rose-900 rounded-lg px-4 py-3.5 text-white focus:border-rose-500 outline-none transition-colors placeholder:text-white/20">
+                    </div>
+                    
+                    <div class="space-y-1.5">
+                        <label class="text-xs uppercase text-rose-300 font-bold tracking-wider">Телефон</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full bg-[#120306] border border-rose-900 rounded-lg px-4 py-3.5 text-white focus:border-rose-500 outline-none transition-colors">
+                        <span id="error-msg" class="text-xs text-rose-500 hidden mt-1">Перевір номер</span>
+                    </div>
+                    
+                    <div class="space-y-1.5">
+                        <label class="text-xs uppercase text-rose-300 font-bold tracking-wider">Telegram</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 text-sm">@</span>
+                            <input type="text" name="telegram" required placeholder="username" class="w-full bg-[#120306] border border-rose-900 rounded-lg pl-9 pr-4 py-3.5 text-white focus:border-rose-500 outline-none transition-colors placeholder:text-white/20">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="w-full bg-passion-gradient text-white font-bold py-4 rounded-lg mt-2 uppercase tracking-widest flex justify-center items-center gap-2 shadow-lg hover:scale-[1.01] transition-transform">
+                        <span>Перейти до оплати</span>
+                        <div class="loader hidden w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    </button>
+                    
+                    <p class="text-[10px] text-center text-white/30">Ваші дані конфіденційні та не будуть передані третім особам.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- === SCRIPTS === -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+    <script>
+        // --- CONFIG ---
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL'; // ВСТАВЬ ССЫЛКУ НА СКРИПТ
+        const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK';           // ВСТАВЬ ССЫЛКУ НА БОТА
+        
+        // --- UI INIT ---
+        lucide.createIcons();
+        
+        // --- TIMER ---
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) timer = duration;
+            }, 1000);
+        }
+        window.onload = function () {
+            startTimer(60 * 15, document.querySelector('#timer')); // 15 min
+            
+            // Fade In Animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        };
+
+        // --- MODAL & FORM ---
+        const modal = document.getElementById('modal');
+        const modalPanel = document.getElementById('modal-panel');
+        
+        function openModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalPanel.classList.remove('translate-y-full', 'scale-95', 'opacity-0');
+                modalPanel.classList.add('translate-y-0', 'md:translate-y-0', 'scale-100', 'opacity-100');
+            }, 10);
+            fbq('track', 'InitiateCheckout');
+        }
+        function closeModal() {
+            modalPanel.classList.remove('translate-y-0', 'scale-100', 'opacity-100');
+            modalPanel.classList.add('translate-y-full', 'scale-95', 'opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // --- PHONE INPUT ---
+        const input = document.querySelector("#phone");
+        const iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            geoIpLookup: c => fetch('https://get.geojs.io/v1/ip/country.json').then(r=>r.json()).then(d=>c(d.country)).catch(()=>c('ua')),
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+            separateDialCode: true
+        });
+
+        // --- SUBMIT ---
+        document.getElementById('leadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(!iti.isValidNumber()) {
+                document.getElementById('error-msg').classList.remove('hidden');
+                return;
+            }
+            
+            const btn = document.getElementById('submitBtn');
+            const loader = btn.querySelector('.loader');
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+
+            const formData = new FormData(e.target);
+            const params = new URLSearchParams(window.location.search);
+            
+            const data = {
+                name: formData.get('name'),
+                phone: iti.getNumber(),
+                telegram: formData.get('telegram'),
+                utm_source: params.get('utm_source') || '',
+                utm_medium: params.get('utm_medium') || '',
+                utm_campaign: params.get('utm_campaign') || '',
+                utm_content: params.get('utm_content') || '',
+                utm_term: params.get('utm_term') || ''
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+            .then(() => {
+                fbq('track', 'Lead');
+                window.location.href = TELEGRAM_BOT_URL;
+            })
+            .catch(() => window.location.href = TELEGRAM_BOT_URL);
+        });
+    </script>
+</body>
+</html>
