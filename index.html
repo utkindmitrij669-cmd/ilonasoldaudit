@@ -46,6 +46,15 @@
                     boxShadow: {
                         'glow': '0 0 20px rgba(219, 39, 119, 0.3)',
                         'card': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+                    },
+                    animation: {
+                        'infinite-scroll': 'infinite-scroll 40s linear infinite',
+                    },
+                    keyframes: {
+                        'infinite-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-100%)' },
+                        }
                     }
                 }
             }
@@ -62,7 +71,7 @@
         .iti__selected-flag { background-color: transparent !important; }
         
         .glass-card {
-            background: rgba(26, 5, 9, 0.7); /* Чуть темнее для читаемости */
+            background: rgba(26, 5, 9, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -82,6 +91,11 @@
             background: linear-gradient(to right, #fdf2f8, #eebb99);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Пауза анимации при наведении или касании */
+        .group:hover .animate-infinite-scroll {
+            animation-play-state: paused;
         }
     </style>
 
@@ -103,26 +117,15 @@
 <body class="antialiased overflow-x-hidden selection:bg-rose-500 selection:text-white">
 
     <!-- === HERO SECTION === -->
-    <!-- h-[100dvh] фиксирует высоту экрана -->
     <header class="relative h-[100dvh] w-full overflow-hidden flex flex-col justify-end">
-        
-        <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <!-- object-top: Принудительно показывает ВЕРХ фото (лицо) -->
             <img src="hero.jpg" alt="Passion" class="w-full h-full object-cover object-top opacity-90">
-            
-            <!-- Градиент: Прозрачный сверху (40%), Темный снизу (60%) -->
-            <!-- Это затемняет низ, чтобы текст читался, но оставляет лицо светлым -->
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a0509]/40 to-[#1a0509]"></div>
         </div>
 
-        <!-- Content Container -->
-        <!-- pt-[35vh]: Отступ сверху 35% высоты экрана. Это ГАРАНТИРУЕТ, что текст начнется ниже лица. -->
         <div class="relative z-10 w-full h-full flex flex-col justify-end px-4 pb-8 pt-[35vh]">
-            
             <div class="flex flex-col items-center text-center gap-4 fade-in-up">
                 
-                <!-- Headline -->
                 <h1 class="text-[26px] md:text-[40px] leading-[1.15] font-serif text-white drop-shadow-xl">
                     Як повернути <span class="text-rose-400 italic font-medium">пристрасть</span> в стосунках, <br>
                     <span class="text-[20px] md:text-[28px] font-light text-cream/95 block mt-2">якщо ти більше його не хочеш — але він дає тобі все?</span>
@@ -132,13 +135,11 @@
                     Без ігор, маніпуляцій і спроб стати іншою.
                 </p>
 
-                <!-- Offer Card -->
                 <div class="w-full max-w-md glass-card p-5 md:p-6 rounded-2xl shadow-card border border-rose-300/10">
                     <p class="text-xs md:text-sm text-gray-200 mb-4 leading-relaxed">
                         Приходь на індивідуальну сесію, де ми знайдемо саме твою причину згасання і складемо конкретний план.
                     </p>
                     
-                    <!-- Price & Timer -->
                     <div class="flex flex-col items-center gap-2 mb-4">
                         <div class="flex items-baseline gap-3">
                             <span class="text-4xl font-serif text-rose-gold font-medium">22 €</span>
@@ -150,7 +151,6 @@
                         </div>
                     </div>
 
-                    <!-- Main Button -->
                     <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-semibold py-3.5 rounded-xl shadow-glow btn-pulse uppercase tracking-[0.15em] text-xs md:text-sm hover:scale-[1.02] transition-transform duration-300 relative overflow-hidden group">
                         <span class="relative z-10">Хочу розпалити пристрасть</span>
                         <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
@@ -320,22 +320,41 @@
         </div>
     </section>
 
-    <!-- === REVIEWS (BLOCK 6) === -->
-    <section class="py-16 px-4">
-        <div class="max-w-4xl mx-auto fade-in-up">
-            <h2 class="text-3xl font-serif text-center mb-8 italic">Що кажуть жінки</h2>
+    <!-- === INFINITE REVIEWS (BLOCK 6) === -->
+    <section class="py-16 overflow-hidden">
+        <div class="max-w-6xl mx-auto space-y-8 fade-in-up">
+            <h2 class="text-3xl font-serif text-center italic px-4">Що кажуть жінки</h2>
             
-            <div class="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory custom-scrollbar">
-                <div class="snap-center shrink-0 w-[85vw] md:w-[320px]">
-                    <img src="review1.jpg" alt="Відгук 1" class="w-full rounded-xl border border-white/10 shadow-lg">
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[320px]">
-                    <img src="review2.jpg" alt="Відгук 2" class="w-full rounded-xl border border-white/10 shadow-lg">
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[320px]">
-                    <img src="review3.jpg" alt="Відгук 3" class="w-full rounded-xl border border-white/10 shadow-lg">
-                </div>
+            <!-- Infinite Scroll Container -->
+            <!-- group класс нужен, чтобы работал pause-on-hover -->
+            <div class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] group">
+                
+                <!-- Set 1 (8 Images) -->
+                <ul class="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll">
+                    <li><img src="otz1.jpg" alt="Відгук 1" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz2.jpg" alt="Відгук 2" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz3.jpg" alt="Відгук 3" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz4.jpg" alt="Відгук 4" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz5.jpg" alt="Відгук 5" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz6.jpg" alt="Відгук 6" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz7.jpg" alt="Відгук 7" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz8.jpg" alt="Відгук 8" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                </ul>
+                
+                <!-- Set 2 (Duplicate 8 Images for smooth loop) -->
+                <ul class="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll" aria-hidden="true">
+                    <li><img src="otz1.jpg" alt="Відгук 1" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz2.jpg" alt="Відгук 2" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz3.jpg" alt="Відгук 3" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz4.jpg" alt="Відгук 4" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz5.jpg" alt="Відгук 5" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz6.jpg" alt="Відгук 6" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz7.jpg" alt="Відгук 7" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                    <li><img src="otz8.jpg" alt="Відгук 8" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
+                </ul>
             </div>
+            
+            <p class="text-center text-xs text-rose-300/50">Зупини, щоб прочитати</p>
         </div>
     </section>
 
