@@ -93,7 +93,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Пауза анимации при наведении или касании */
         .group:hover .animate-infinite-scroll {
             animation-play-state: paused;
         }
@@ -110,8 +109,30 @@
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
         
-        fbq('init', 'YOUR_PIXEL_ID'); 
+        fbq('init', '1299600201739170'); 
         fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1299600201739170&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Price Config -->
+    <script>
+        const PRICING = {
+            '22': { current: 22, old: 144 },
+            '33': { current: 33, old: 180 },
+            '44': { current: 44, old: 220 },
+            'default': { current: 22, old: 144 }
+        };
+        
+        function getPrice() {
+            const params = new URLSearchParams(window.location.search);
+            const priceParam = params.get('price');
+            return PRICING[priceParam] || PRICING['default'];
+        }
+        
+        const CURRENT_PRICE = getPrice();
     </script>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-rose-500 selection:text-white">
@@ -142,8 +163,8 @@
                     
                     <div class="flex flex-col items-center gap-2 mb-4">
                         <div class="flex items-baseline gap-3">
-                            <span class="text-4xl font-serif text-rose-gold font-medium">22 €</span>
-                            <span class="text-lg text-white/40 line-through decoration-rose-500 decoration-1">144 €</span>
+                            <span class="text-4xl font-serif text-rose-gold font-medium dynamic-price">22 €</span>
+                            <span class="text-lg text-white/40 line-through decoration-rose-500 decoration-1 dynamic-old-price">144 €</span>
                         </div>
                         <div class="flex items-center gap-1.5 text-[10px] md:text-xs font-semibold tracking-wider text-rose-300 bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-500/20">
                             <i data-lucide="clock" class="w-3 h-3"></i>
@@ -325,11 +346,8 @@
         <div class="max-w-6xl mx-auto space-y-8 fade-in-up">
             <h2 class="text-3xl font-serif text-center italic px-4">Що кажуть жінки</h2>
             
-            <!-- Infinite Scroll Container -->
-            <!-- group класс нужен, чтобы работал pause-on-hover -->
             <div class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] group">
                 
-                <!-- Set 1 (8 Images) -->
                 <ul class="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll">
                     <li><img src="otz1.jpg" alt="Відгук 1" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
                     <li><img src="otz2.jpg" alt="Відгук 2" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
@@ -341,7 +359,6 @@
                     <li><img src="otz8.jpg" alt="Відгук 8" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
                 </ul>
                 
-                <!-- Set 2 (Duplicate 8 Images for smooth loop) -->
                 <ul class="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll" aria-hidden="true">
                     <li><img src="otz1.jpg" alt="Відгук 1" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
                     <li><img src="otz2.jpg" alt="Відгук 2" class="w-[300px] rounded-xl shadow-lg border border-white/10"></li>
@@ -372,7 +389,7 @@
                     </div>
                     <h2 class="text-2xl font-serif text-white mb-3">100% Гарантія повернення</h2>
                     <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-                        Якщо після сесії ти не отримаєш жодного нового розуміння своєї ситуації — я поверну тобі всі 22€ без зайвих питань.
+                        Якщо після сесії ти не отримаєш жодного нового розуміння своєї ситуації — я поверну тобі всі <span class="dynamic-price-inline">22</span>€ без зайвих питань.
                     </p>
                     <p class="text-rose-200 font-medium text-sm">
                         Ти нічим не ризикуєш. Крім звички жити без бажання.
@@ -410,7 +427,7 @@
                  <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-bold py-5 rounded-xl shadow-glow btn-pulse uppercase tracking-widest text-lg hover:scale-[1.02] transition-transform">
                     Хочу повернути пристрасть
                 </button>
-                <p class="text-rose-200/80 text-sm font-medium">Кількість місць за ціною 22€ обмежена</p>
+                <p class="text-rose-200/80 text-sm font-medium">Кількість місць за ціною <span class="dynamic-price-inline">22</span>€ обмежена</p>
             </div>
         </div>
     </section>
@@ -418,7 +435,7 @@
     <!-- === STICKY MOBILE CTA === -->
     <div class="fixed bottom-0 left-0 w-full p-4 bg-[#1a0509]/90 backdrop-blur-lg border-t border-rose-500/20 z-40 md:hidden">
         <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-bold py-3 rounded-lg shadow-lg text-sm uppercase tracking-widest">
-            Записатись за 22€
+            Записатись за <span class="dynamic-price-inline">22</span>€
         </button>
     </div>
 
@@ -438,7 +455,7 @@
             <div class="p-6">
                 <form id="leadForm" class="space-y-5">
                     <div class="space-y-1.5">
-                        <label class="text-xs uppercase text-rose-300 font-bold tracking-wider">Ім’я</label>
+                        <label class="text-xs uppercase text-rose-300 font-bold tracking-wider">Ім'я</label>
                         <input type="text" name="name" required placeholder="Як до тебе звертатись?" class="w-full bg-[#120306] border border-rose-900 rounded-lg px-4 py-3.5 text-white focus:border-rose-500 outline-none transition-colors placeholder:text-white/20">
                     </div>
                     
@@ -471,8 +488,8 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
     <script>
         // --- CONFIG ---
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL'; 
-        const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK';           
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzaMx_j2eJQrcjDuLoV1a7i9-ymBysQuUFblqVDzgFE_ytdLJNtcHvjBN7Xu3V7UOOq/exec';
+        const THANKS_URL = window.location.origin + '/thanks.html';
         
         lucide.createIcons();
         
@@ -489,6 +506,17 @@
         }
         window.onload = function () {
             startTimer(60 * 15, document.querySelector('#timer')); 
+            
+            // Оновлюємо ціни на сторінці
+            document.querySelectorAll('.dynamic-price').forEach(el => {
+                el.textContent = CURRENT_PRICE.current + ' €';
+            });
+            document.querySelectorAll('.dynamic-old-price').forEach(el => {
+                el.textContent = CURRENT_PRICE.old + ' €';
+            });
+            document.querySelectorAll('.dynamic-price-inline').forEach(el => {
+                el.textContent = CURRENT_PRICE.current;
+            });
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -507,7 +535,11 @@
                 modalPanel.classList.remove('translate-y-full', 'scale-95', 'opacity-0');
                 modalPanel.classList.add('translate-y-0', 'md:translate-y-0', 'scale-100', 'opacity-100');
             }, 10);
-            fbq('track', 'InitiateCheckout');
+            if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', {
+                value: CURRENT_PRICE.current,
+                currency: 'EUR',
+                content_name: 'Індивідуальна сесія'
+            });
         }
         function closeModal() {
             modalPanel.classList.remove('translate-y-0', 'scale-100', 'opacity-100');
@@ -538,23 +570,48 @@
             const formData = new FormData(e.target);
             const params = new URLSearchParams(window.location.search);
             
+            // Формуємо telegram з @
+            let telegram = formData.get('telegram').trim();
+            if (!telegram.startsWith('@')) {
+                telegram = '@' + telegram;
+            }
+            
             const data = {
+                sheet_name: 'Платний аудіт',
                 name: formData.get('name'),
                 phone: iti.getNumber(),
-                telegram: formData.get('telegram'),
-                utm_source: params.get('utm_source') || '',
-                utm_medium: params.get('utm_medium') || '',
-                utm_campaign: params.get('utm_campaign') || '',
-                utm_content: params.get('utm_content') || '',
-                utm_term: params.get('utm_term') || ''
+                telegram: telegram,
+                campaign_name: params.get('campaign_name') || params.get('utm_campaign') || '',
+                adset_name: params.get('adset_name') || params.get('utm_medium') || '',
+                ad_name: params.get('ad_name') || params.get('utm_content') || ''
             };
 
-            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
-            .then(() => {
-                fbq('track', 'Lead');
-                window.location.href = TELEGRAM_BOT_URL;
+            // Lead піксель ПЕРЕД fetch
+            if (typeof fbq === 'function') fbq('track', 'Lead', {
+                value: CURRENT_PRICE.current,
+                currency: 'EUR',
+                content_name: 'Індивідуальна сесія'
+            });
+            
+            // Зберігаємо ціну для thanks.html
+            localStorage.setItem('purchase_price', CURRENT_PRICE.current);
+
+            fetch(GOOGLE_SCRIPT_URL, { 
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data) 
             })
-            .catch(() => window.location.href = TELEGRAM_BOT_URL);
+            .then(() => {
+                setTimeout(() => {
+                    window.location.href = THANKS_URL;
+                }, 500);
+            })
+            .catch(() => {
+                setTimeout(() => {
+                    window.location.href = THANKS_URL;
+                }, 500);
+            });
         });
     </script>
 </body>
