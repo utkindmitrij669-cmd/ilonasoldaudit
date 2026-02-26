@@ -113,9 +113,7 @@
     <header class="relative min-h-[95vh] flex flex-col items-center justify-center text-center px-4 py-8 overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <!-- Желательно фото с красным оттенком или ч/б -->
             <img src="hero.jpg" alt="Passion" class="w-full h-full object-cover opacity-60">
-            <!-- Градиент поверх фото (Винный -> Черный) -->
             <div class="absolute inset-0 bg-gradient-to-b from-[#1a0509]/60 via-[#4a0e1c]/40 to-[#1a0509]"></div>
         </div>
 
@@ -164,7 +162,6 @@
 
     <!-- === PAIN POINTS (BLOCK 2) === -->
     <section class="py-16 px-4 relative">
-        <!-- Декоративное пятно -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 blur-[100px] rounded-full pointer-events-none"></div>
 
         <div class="max-w-2xl mx-auto space-y-10 relative z-10">
@@ -224,7 +221,8 @@
             <div class="space-y-6 text-left">
                 <!-- Reason 1 -->
                 <div class="flex gap-5 items-start bg-white/5 p-5 rounded-xl border border-white/5">
-                    <div class="w-8 h-8 shrink-0 bg-rose-500 rounded-full flex items-center justify-center text-white font-serif italic text-lg shadow-[0_0_15px_rgba(244,63,94,0.4)]">1</div>
+                    <!-- ИЗМЕНЕНИЕ: Тусклая кнопка -->
+                    <div class="w-8 h-8 shrink-0 bg-rose-900/40 rounded-full flex items-center justify-center text-rose-200 font-serif italic text-lg border border-rose-500/20">1</div>
                     <div>
                         <h4 class="text-lg font-serif text-rose-100 mb-1">Ти загубила себе як жінку</h4>
                         <p class="text-sm text-gray-400 font-light">Мама, партнер, господиня... Бажання народжується з жіночності. Коли вона придушена, бажання зникає.</p>
@@ -233,7 +231,8 @@
 
                 <!-- Reason 2 -->
                 <div class="flex gap-5 items-start bg-white/5 p-5 rounded-xl border border-white/5">
-                    <div class="w-8 h-8 shrink-0 bg-rose-500 rounded-full flex items-center justify-center text-white font-serif italic text-lg shadow-[0_0_15px_rgba(244,63,94,0.4)]">2</div>
+                    <!-- ИЗМЕНЕНИЕ: Тусклая кнопка -->
+                    <div class="w-8 h-8 shrink-0 bg-rose-900/40 rounded-full flex items-center justify-center text-rose-200 font-serif italic text-lg border border-rose-500/20">2</div>
                     <div>
                         <h4 class="text-lg font-serif text-rose-100 mb-1">Є невидимий блок між вами</h4>
                         <p class="text-sm text-gray-400 font-light">Стара образа, невисловлені слова. Тіло пам'ятає те, що розум "вже відпустив".</p>
@@ -242,7 +241,8 @@
 
                 <!-- Reason 3 -->
                 <div class="flex gap-5 items-start bg-white/5 p-5 rounded-xl border border-white/5">
-                    <div class="w-8 h-8 shrink-0 bg-rose-500 rounded-full flex items-center justify-center text-white font-serif italic text-lg shadow-[0_0_15px_rgba(244,63,94,0.4)]">3</div>
+                    <!-- ИЗМЕНЕНИЕ: Тусклая кнопка -->
+                    <div class="w-8 h-8 shrink-0 bg-rose-900/40 rounded-full flex items-center justify-center text-rose-200 font-serif italic text-lg border border-rose-500/20">3</div>
                     <div>
                         <h4 class="text-lg font-serif text-rose-100 mb-1">Ви застрягли в одному сценарії</h4>
                         <p class="text-sm text-gray-400 font-light">Мозок хоче новизни, і коли її немає — він вимикає інтерес до партнера. Секс стає механічним.</p>
@@ -254,7 +254,6 @@
 
     <!-- === SOLUTION (BLOCK 4) === -->
     <section class="py-20 px-4 relative overflow-hidden">
-        <!-- Фоновый узор -->
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-felt.png')] opacity-20"></div>
         <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-rose-900/20 to-transparent"></div>
 
@@ -334,7 +333,6 @@
             <h2 class="text-3xl font-serif text-center mb-8 italic">Що кажуть жінки</h2>
             
             <div class="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory custom-scrollbar">
-                <!-- Review Images -->
                 <div class="snap-center shrink-0 w-[85vw] md:w-[320px]">
                     <img src="review1.jpg" alt="Відгук 1" class="w-full rounded-xl border border-white/10 shadow-lg">
                 </div>
@@ -352,7 +350,6 @@
     <section class="py-12 px-4">
         <div class="max-w-2xl mx-auto fade-in-up">
             <div class="glass-card p-8 rounded-2xl text-center relative overflow-hidden border border-rose-500/30">
-                <!-- Glow -->
                 <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-rose-500/20 blur-[60px] rounded-full"></div>
 
                 <div class="relative z-10">
@@ -397,11 +394,12 @@
                 </li>
             </ul>
 
-            <div class="mt-12 text-center space-y-4">
+            <div class="mt-12 text-center space-y-3">
                  <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-bold py-5 rounded-xl shadow-glow btn-pulse uppercase tracking-widest text-lg hover:scale-[1.02] transition-transform">
                     Хочу повернути пристрасть
                 </button>
-                <p class="text-rose-200/50 text-xs">Кількість місць за ціною 22€ обмежена</p>
+                <!-- ИЗМЕНЕНИЕ: Текст больше и ярче -->
+                <p class="text-rose-200/80 text-sm font-medium">Кількість місць за ціною 22€ обмежена</p>
             </div>
         </div>
     </section>
@@ -462,13 +460,11 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
     <script>
         // --- CONFIG ---
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL'; // ВСТАВЬ ССЫЛКУ НА СКРИПТ
-        const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK';           // ВСТАВЬ ССЫЛКУ НА БОТА
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL'; 
+        const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK';           
         
-        // --- UI INIT ---
         lucide.createIcons();
         
-        // --- TIMER ---
         function startTimer(duration, display) {
             let timer = duration, minutes, seconds;
             setInterval(function () {
@@ -481,9 +477,8 @@
             }, 1000);
         }
         window.onload = function () {
-            startTimer(60 * 15, document.querySelector('#timer')); // 15 min
+            startTimer(60 * 15, document.querySelector('#timer')); 
             
-            // Fade In Animation
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if(entry.isIntersecting) entry.target.classList.add('visible');
@@ -492,7 +487,6 @@
             document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
         };
 
-        // --- MODAL & FORM ---
         const modal = document.getElementById('modal');
         const modalPanel = document.getElementById('modal-panel');
         
@@ -510,7 +504,6 @@
             setTimeout(() => modal.classList.add('hidden'), 300);
         }
 
-        // --- PHONE INPUT ---
         const input = document.querySelector("#phone");
         const iti = window.intlTelInput(input, {
             initialCountry: "auto",
@@ -519,7 +512,6 @@
             separateDialCode: true
         });
 
-        // --- SUBMIT ---
         document.getElementById('leadForm').addEventListener('submit', (e) => {
             e.preventDefault();
             if(!iti.isValidNumber()) {
