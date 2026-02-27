@@ -123,6 +123,7 @@
             '22': { current: 22, old: 144 },
             '33': { current: 33, old: 180 },
             '44': { current: 44, old: 220 },
+            'test': { current: 1, old: 100 },
             'default': { current: 22, old: 144 }
         };
         
@@ -488,8 +489,8 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
     <script>
         // --- CONFIG ---
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzaMx_j2eJQrcjDuLoV1a7i9-ymBysQuUFblqVDzgFE_ytdLJNtcHvjBN7Xu3V7UOOq/exec';
-        const THANKS_URL = window.location.origin + '/thanks.html';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyu0XAXb0lpw1twmy-J2jTJQqdPf7uUq-M3LNSGuMdzZNCCj4wSUsbnGzoEHtr_4On25Q/exec';
+        const RETURN_URL = 'https://fokuskohannia.vercel.app/thanks.html';
         
         lucide.createIcons();
         
@@ -504,6 +505,7 @@
                 if (--timer < 0) timer = duration;
             }, 1000);
         }
+        
         window.onload = function () {
             startTimer(60 * 15, document.querySelector('#timer')); 
             
@@ -563,8 +565,10 @@
             }
             
             const btn = document.getElementById('submitBtn');
+            const btnText = btn.querySelector('span');
             const loader = btn.querySelector('.loader');
             btn.disabled = true;
+            btnText.textContent = 'Обробка...';
             loader.classList.remove('hidden');
 
             const formData = new FormData(e.target);
@@ -575,16 +579,6 @@
             if (!telegram.startsWith('@')) {
                 telegram = '@' + telegram;
             }
-            
-            const data = {
-                sheet_name: 'Платний аудіт',
-                name: formData.get('name'),
-                phone: iti.getNumber(),
-                telegram: telegram,
-                campaign_name: params.get('campaign_name') || params.get('utm_campaign') || '',
-                adset_name: params.get('adset_name') || params.get('utm_medium') || '',
-                ad_name: params.get('ad_name') || params.get('utm_content') || ''
-            };
 
             // Lead піксель ПЕРЕД fetch
             if (typeof fbq === 'function') fbq('track', 'Lead', {
@@ -596,21 +590,73 @@
             // Зберігаємо ціну для thanks.html
             localStorage.setItem('purchase_price', CURRENT_PRICE.current);
 
-            fetch(GOOGLE_SCRIPT_URL, { 
+            // Формуємо дані для відправки
+            const data = new FormData();
+            data.append('action', 'ilona_paid');
+            data.append('name', formData.get('name'));
+            data.append('telegram', telegram);
+            data.append('full_phone', iti.getNumber());
+            data.append('amount', CURRENT_PRICE.current);
+            data.append('return_url', RETURN_URL);
+            data.append('campaign_name', params.get('campaign_name') || params.get('utm_campaign') || '');
+            data.append('adset_name', params.get('adset_name') || params.get('utm_medium') || '');
+            data.append('ad_name', params.get('ad_name') || params.get('utm_content') || '');
+
+            fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data) 
+                body: data
             })
-            .then(() => {
-                setTimeout(() => {
-                    window.location.href = THANKS_URL;
-                }, 500);
+            .then(response => response.json())
+            .then(result => {
+                if (result.paymentData) {
+                    // Створюємо форму для WayForPay
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = 'https://secure.wayforpay.com/pay';
+                    form.target = '_top';
+                    form.style.display = 'none';
+                    
+                    const pd = result.paymentData;
+                    const fields = {
+                        'merchantAccount': pd.merchantAccount,
+                        'merchantDomainName': pd.merchantDomainName,
+                        'orderReference': pd.orderReference,
+                        'orderDate': pd.orderDate,
+                        'amount': pd.amount,
+                        'currency': pd.currency,
+                        'productName[]': pd.productName,
+                        'productCount[]': pd.productCount,
+                        'productPrice[]': pd.productPrice,
+                        'merchantSignature': pd.merchantSignature,
+                        'returnUrl': pd.returnUrl,
+                        'serviceUrl': pd.serviceUrl,
+                        'clientFirstName': pd.clientFirstName,
+                        'clientPhone': pd.clientPhone
+                    };
+                    
+                    for (const [key, value] of Object.entries(fields)) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = value;
+                        form.appendChild(input);
+                    }
+                    
+                    document.body.appendChild(form);
+                    form.submit();
+                } else {
+                    alert('Помилка: ' + JSON.stringify(result));
+                    btn.disabled = false;
+                    btnText.textContent = 'Перейти до оплати';
+                    loader.classList.add('hidden');
+                }
             })
-            .catch(() => {
-                setTimeout(() => {
-                    window.location.href = THANKS_URL;
-                }, 500);
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Помилка. Спробуйте ще раз.');
+                btn.disabled = false;
+                btnText.textContent = 'Перейти до оплати';
+                loader.classList.add('hidden');
             });
         });
     </script>
