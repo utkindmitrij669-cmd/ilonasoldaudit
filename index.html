@@ -120,11 +120,11 @@
     <!-- Price Config -->
     <script>
         const PRICING = {
-            '22': { current: 22, old: 144 },
-            '33': { current: 33, old: 180 },
-            '44': { current: 44, old: 220 },
-            'test': { current: 1, old: 100 },
-            'default': { current: 22, old: 144 }
+            '22': { current: 22, old: 144, currency: 'EUR' },
+            '33': { current: 33, old: 180, currency: 'EUR' },
+            '44': { current: 44, old: 220, currency: 'EUR' },
+            'test': { current: 1, old: 100, currency: 'UAH' },
+            'default': { current: 22, old: 144, currency: 'EUR' }
         };
         
         function getPrice() {
@@ -134,6 +134,7 @@
         }
         
         const CURRENT_PRICE = getPrice();
+        const CURRENCY_SYMBOL = CURRENT_PRICE.currency === 'UAH' ? '₴' : '€';
     </script>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-rose-500 selection:text-white">
@@ -511,13 +512,13 @@
             
             // Оновлюємо ціни на сторінці
             document.querySelectorAll('.dynamic-price').forEach(el => {
-                el.textContent = CURRENT_PRICE.current + ' €';
+                el.textContent = CURRENT_PRICE.current + ' ' + CURRENCY_SYMBOL;
             });
             document.querySelectorAll('.dynamic-old-price').forEach(el => {
-                el.textContent = CURRENT_PRICE.old + ' €';
+                el.textContent = CURRENT_PRICE.old + ' ' + CURRENCY_SYMBOL;
             });
             document.querySelectorAll('.dynamic-price-inline').forEach(el => {
-                el.textContent = CURRENT_PRICE.current;
+                el.textContent = CURRENT_PRICE.current + CURRENCY_SYMBOL;
             });
             
             const observer = new IntersectionObserver((entries) => {
@@ -597,6 +598,7 @@
             data.append('telegram', telegram);
             data.append('full_phone', iti.getNumber());
             data.append('amount', CURRENT_PRICE.current);
+            data.append('currency', CURRENT_PRICE.currency);
             data.append('return_url', RETURN_URL);
             data.append('campaign_name', params.get('campaign_name') || params.get('utm_campaign') || '');
             data.append('adset_name', params.get('adset_name') || params.get('utm_medium') || '');
