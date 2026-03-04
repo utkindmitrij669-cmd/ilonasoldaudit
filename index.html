@@ -120,11 +120,11 @@
     <!-- Price Config -->
     <script>
         const PRICING = {
-            '22': { current: 22, old: 144, currency: 'EUR' },
-            '33': { current: 33, old: 180, currency: 'EUR' },
-            '44': { current: 44, old: 220, currency: 'EUR' },
+            '22': { current: 290, old: 1290, currency: 'UAH' },
+            '33': { current: 390, old: 1790, currency: 'UAH' },
+            '44': { current: 590, old: 2190, currency: 'UAH' },
             'test': { current: 1, old: 100, currency: 'UAH' },
-            'default': { current: 22, old: 144, currency: 'EUR' }
+            'default': { current: 390, old: 1790, currency: 'UAH' }
         };
         
         function getPrice() {
@@ -134,7 +134,7 @@
         }
         
         const CURRENT_PRICE = getPrice();
-        const CURRENCY_SYMBOL = CURRENT_PRICE.currency === 'UAH' ? '₴' : '€';
+        const CURRENCY_SYMBOL = '₴';
     </script>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-rose-500 selection:text-white">
@@ -165,8 +165,8 @@
                     
                     <div class="flex flex-col items-center gap-2 mb-4">
                         <div class="flex items-baseline gap-3">
-                            <span class="text-4xl font-serif text-rose-gold font-medium dynamic-price">22 €</span>
-                            <span class="text-lg text-white/40 line-through decoration-rose-500 decoration-1 dynamic-old-price">144 €</span>
+                            <span class="text-4xl font-serif text-rose-gold font-medium dynamic-price">390 ₴</span>
+                            <span class="text-lg text-white/40 line-through decoration-rose-500 decoration-1 dynamic-old-price">1790 ₴</span>
                         </div>
                         <div class="flex items-center gap-1.5 text-[10px] md:text-xs font-semibold tracking-wider text-rose-300 bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-500/20">
                             <i data-lucide="clock" class="w-3 h-3"></i>
@@ -391,7 +391,7 @@
                     </div>
                     <h2 class="text-2xl font-serif text-white mb-3">100% Гарантія повернення</h2>
                     <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-                        Якщо після сесії ти не отримаєш жодного нового розуміння своєї ситуації — я поверну тобі всі <span class="dynamic-price-inline">22</span>€ без зайвих питань.
+                        Якщо після сесії ти не отримаєш жодного нового розуміння своєї ситуації — я поверну тобі всі <span class="dynamic-price-inline">390</span>₴ без зайвих питань.
                     </p>
                     <p class="text-rose-200 font-medium text-sm">
                         Ти нічим не ризикуєш. Крім звички жити без бажання.
@@ -429,7 +429,7 @@
                  <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-bold py-5 rounded-xl shadow-glow btn-pulse uppercase tracking-widest text-lg hover:scale-[1.02] transition-transform">
                     Хочу повернути пристрасть
                 </button>
-                <p class="text-rose-200/80 text-sm font-medium">Кількість місць за ціною <span class="dynamic-price-inline">22</span>€ обмежена</p>
+                <p class="text-rose-200/80 text-sm font-medium">Кількість місць за ціною <span class="dynamic-price-inline">390</span>₴ обмежена</p>
             </div>
         </div>
     </section>
@@ -437,7 +437,7 @@
     <!-- === STICKY MOBILE CTA === -->
     <div class="fixed bottom-0 left-0 w-full p-4 bg-[#1a0509]/90 backdrop-blur-lg border-t border-rose-500/20 z-40 md:hidden">
         <button onclick="openModal()" class="w-full bg-passion-gradient text-white font-bold py-3 rounded-lg shadow-lg text-sm uppercase tracking-widest">
-            Записатись за <span class="dynamic-price-inline">22</span>€
+            Записатись за <span class="dynamic-price-inline">390</span>₴
         </button>
     </div>
 
@@ -540,7 +540,7 @@
             }, 10);
             if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', {
                 value: CURRENT_PRICE.current,
-                currency: 'EUR',
+                currency: 'UAH',
                 content_name: 'Індивідуальна сесія'
             });
         }
@@ -584,7 +584,7 @@
             // Lead піксель ПЕРЕД fetch
             if (typeof fbq === 'function') fbq('track', 'Lead', {
                 value: CURRENT_PRICE.current,
-                currency: 'EUR',
+                currency: 'UAH',
                 content_name: 'Індивідуальна сесія'
             });
             
