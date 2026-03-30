@@ -90,6 +90,7 @@
         .text-gradient {
             background: linear-gradient(to right, #fdf2f8, #eebb99);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -593,6 +594,8 @@
 
             // Формуємо дані для відправки
             const data = new FormData();
+            data.append('sheet_id', '949760373');
+            data.append('sheetName', 'Платний аудіт (Діма) 1');
             data.append('action', 'ilona_paid');
             data.append('name', formData.get('name'));
             data.append('telegram', telegram);
